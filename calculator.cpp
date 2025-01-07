@@ -1,57 +1,106 @@
 #include <iostream>
 using namespace std;
-int add(float x, float y)
+
+void update(float num[],char op[],int in,int& count,int& b)
 {
- return x+y;
-}
-int sub(float x,float y)
+    for(int i=in+1;i<=count;i++)
 {
-return x-y;
+num[i]=num[i+1];
 }
-int multiply(float x,float y)
+for(int i=in;i<=b;i++)
 {
-return x*y;
+    op[i]=op[i+1];
+
 }
-int divide(float x,float y)
-{
-return x/y;
+
+count--;
+b--;
 }
+
 int main()
 {
 const int size=100;
+int a=0;
+int b=0;
+int counter=0;
 
 cout<<"----------SIMPLE-CALCULATOR-----------"<<endl;
 float number [size];
 char operater[5];
-int option;
+int option=0;
+do{
+    if(option==2)
+    {
+        cout<<"ENTER OPERATOR ( +,-,*,/) :";
+cin>>operater[b];
+    }
 
 cout<<"ENTER NUMBER TO OPERATE:";
-cin>>number[0];
+cin>>number[a];
+counter++;
 cout<<"ENTER OPERATOR ( +,-,*,/) :";
-cin>>operater[0];
+cin>>operater[b];
 cout<<"ENTER NUMBER TO OPERATE:";
-cin>>number[1];
+cin>>number[a+1];
+counter++;
 cout<<"ENTER 1 FOR RESULT AND 2 TO ADD ANOTHER NUMBER TO OPERATE:";
-cin>>option;
-if(option==1)
+cin>>option; 
+a++;
+b++;
+ }while(option==2);
+
+
+ if (option==1)
  {
-    if(operater[0]=='+')
-    cout<<"RESULT="<<add(number[0],number[1])<<endl;
-    if(operater[0]=='-')
-    cout<<"RESULT="<<sub(number[0],number[1])<<endl;
-    if(operater[0]=='*')
-    cout<<"RESULT="<<multiply(number[0],number[1])<<endl;
-    if(operater[0]=='/')
-    cout<<"RESULT="<<divide(number[0],number[1])<<endl;
 
-    
+for(int i=0;i<=b;i++)
 
-
+{
+if(operater[i]=='/')
+{   if(i>0)
+    number[i-1]=number[i-1]/number[i+1];
+    else
+    number[i]=number[i]/number[i+1];
+    update(number,operater,i,counter,b);
+    
+}
+}
+for(int i=0;i<=b;i++)
+{if(operater[i]=='*')
+{   if(i>0)
+    number[i-1]=number[i-1]*number[i+1];
+    else
+    number[i]=number[i]*number[i+1];
+    update(number,operater,i,counter,b);
+    
+}
+}
+for(int i=0;i<=b;i++)
+{if(operater[i]=='+')
+{   if(i>0)
+    number[i-1]=number[i-1]+number[i+1];
+    else
+    number[i]=number[i]+number[i+1];
+    update(number,operater,i,counter,b);
+    
+}
+}
+   for(int i=0;i<=b;i++) 
+   {
+    if(operater[i]=='-')
+{   if(i>0)
+    number[i-1]=number[i-1]-number[i+1];
+    else
+    number[i]=number[i]-number[i+1];
+    update(number,operater,i,counter,b);
+    
+}}
+ 
     
     
     
     
-    
+    cout<<"number="<<number[0];
     
     
     }
